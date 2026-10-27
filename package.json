@@ -1,0 +1,14 @@
+{
+  "name": "painel-virtual-executivos-quintoandar",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Painel RTx para acompanhamento dos processos dos Executivos QuintoAndar.",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check server.mjs && node --check app.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: painel-virtual-executivos-quintoandar
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PIPEFY_CLIENT_ID
+        sync: false
+      - key: PIPEFY_CLIENT_SECRET
+        sync: false
+      - key: PIPEFY_OAUTH_TOKEN_URL
+        sync: false
+      - key: PIPEFY_PIPE_APROVACAO_ID
+        value: "306812867"
+      - key: PIPEFY_PIPE_PROCESSOS_ID
+        value: "306826870"
+      - key: PIPEFY_DATABASE_EXECUTIVOS_ID
+        value: "iDNYMVc-"
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD_SALT
+        sync: false
+      - key: ADMIN_PASSWORD_HASH
+        sync: false
+      - key: EXECUTIVE_PASSWORD_SALT
+        sync: false
+      - key: EXECUTIVE_PASSWORD_HASH
+        sync: false

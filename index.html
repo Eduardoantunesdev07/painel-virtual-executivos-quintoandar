@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Painel de acompanhamento de clientes para executivos QuintoAndar." />
+    <title>RTx · Painel de Clientes</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section class="login-screen" id="loginScreen" aria-labelledby="loginTitle">
+      <div class="login-accent" aria-hidden="true"></div>
+      <main class="login-card">
+        <div class="brand brand--large" aria-label="RTx Assessoria em Crédito Imobiliário">
+          <div class="brand-mark"><span>RT</span><strong>x</strong></div>
+          <span class="brand-caption">Assessoria em crédito imobiliário</span>
+        </div>
+        <div class="login-copy">
+          <span class="eyebrow">Área exclusiva</span>
+          <h1 id="loginTitle">Acompanhe seus clientes, todos os dias.</h1>
+          <p>Consulte fases, prazos e atualizações do processo sem precisar solicitar informações à equipe RTx.</p>
+        </div>
+        <form id="loginForm" class="login-form">
+          <label for="username">Usuário ou e-mail</label>
+          <input id="username" name="username" autocomplete="username" placeholder="Gestor: usuário · Executivo: e-mail" required />
+          <label for="password">Senha</label>
+          <div class="password-wrap">
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Digite sua senha" required />
+            <button type="button" class="icon-button" id="togglePassword" aria-label="Mostrar senha">Mostrar</button>
+          </div>
+          <p class="form-error" id="loginError" role="alert"></p>
+          <button class="button button--primary" type="submit">Entrar no painel <span>→</span></button>
+        </form>
+        <p class="security-note">Acesso protegido · Credenciais validadas no servidor.</p>
+      </main>
+      <aside class="login-visual" aria-hidden="true">
+        <div class="visual-orbit visual-orbit--one"></div>
+        <div class="visual-orbit visual-orbit--two"></div>
+        <div class="visual-card visual-card--top">
+          <span class="mini-label">Processos em dia</span>
+          <strong>84%</strong>
+          <span class="mini-trend">↑ 6% neste mês</span>
+        </div>
+        <div class="visual-card visual-card--bottom">
+          <span class="status-dot"></span>
+          <div><strong>Atualização diária</strong><span>Informações sempre à mão</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="app-shell hidden" id="appShell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <div class="brand-mark"><span>RT</span><strong>x</strong></div>
+          <span class="brand-caption">Crédito imobiliário</span>
+        </div>
+        <nav aria-label="Navegação principal">
+          <button class="nav-item active" data-pipe="all"><span class="nav-icon">⌂</span>Painel geral</button>
+          <button class="nav-item" data-pipe="306812867"><span class="nav-icon">①</span>Painel Aprovação</button>
+          <button class="nav-item" data-pipe="306826870"><span class="nav-icon">②</span>Painel Processos</button>
+          <button class="nav-item manager-only" id="newExecutiveButton"><span class="nav-icon">+</span>Cadastrar executivo</button>
+          <button class="nav-item manager-only" id="teamDirectoryButton"><span class="nav-icon">☎</span>Executivos e corretores</button>
+        </nav>
+        <div class="sidebar-foot">
+          <div class="user-mini">
+            <span class="avatar" id="sidebarAvatar">EA</span>
+            <div><strong id="sidebarName">Usuário</strong><span id="sidebarRole">Executivo</span></div>
+          </div>
+          <button class="logout-button" id="logoutButton">Sair</button>
+        </div>
+      </aside>
+
+      <div class="main-area">
+        <header class="topbar">
+          <button class="menu-button" id="menuButton" aria-label="Abrir menu">☰</button>
+          <div>
+            <span class="eyebrow" id="dateLabel"></span>
+            <h1 id="welcomeTitle">Olá!</h1>
+          </div>
+          <div class="topbar-actions">
+            <label class="search-field">
+              <span>⌕</span>
+              <input id="globalSearch" type="search" placeholder="Buscar cliente ou fase" />
+            </label>
+            <span class="role-badge" id="roleBadge">Executivo</span>
+          </div>
+        </header>
+
+        <main class="content">
+          <section class="summary-grid" aria-label="Resumo dos processos">
+            <article class="metric-card metric-card--accent"><span>Clientes ativos</span><strong id="metricActive">0</strong><small>processos em acompanhamento</small></article>
+            <article class="metric-card"><span>Dentro do prazo</span><strong id="metricOnTime">0</strong><small id="metricOnTimePercent">0% da carteira</small></article>
+            <article class="metric-card"><span>Atenção necessária</span><strong id="metricAttention">0</strong><small>próximos do prazo padrão</small></article>
+            <article class="metric-card"><span>Prazo excedido</span><strong id="metricLate">0</strong><small>necessitam atualização</small></article>
+          </section>
+
+          <section class="panel toolbar-panel">
+            <div>
+              <span class="section-number">01</span>
+              <div><h2 id="portfolioTitle">Seus clientes</h2><p id="portfolioSubtitle">Acompanhamento atualizado dos processos.</p></div>
+            </div>
+            <div class="filters">
+              <button class="view-button reconnect-button hidden" id="retryDataButton" type="button">Reconectar ao Pipefy</button>
+              <label>Executivo<select id="executiveFilter"><option value="all">Todos os executivos</option></select></label>
+              <label>Status<select id="statusFilter"><option value="all">Todos os status</option><option value="ok">Dentro do prazo</option><option value="attention">Atenção</option><option value="late">Prazo excedido</option></select></label>
+            </div>
+          </section>
+
+          <section class="panel table-panel">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Cliente</th><th class="manager-only">Executivo QuintoAndar</th><th>Corretor</th><th>Fase atual</th><th>Entrada na fase</th><th>Dias na fase</th><th>Prazo padrão</th><th>Status</th><th></th></tr></thead>
+                <tbody id="clientsTableBody"></tbody>
+              </table>
+            </div>
+            <div class="empty-state hidden" id="emptyState"><strong>Nenhum cliente encontrado</strong><span>Tente ajustar os filtros ou o termo de busca.</span></div>
+            <footer class="table-footer"><span id="resultCount">0 clientes</span><span id="dataSourceLabel">Carregando fonte de dados…</span></footer>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <dialog id="clientDialog" class="client-dialog">
+      <button class="dialog-close" id="dialogClose" aria-label="Fechar">×</button>
+      <span class="eyebrow">Detalhes do processo</span>
+      <h2 id="dialogClientName">Cliente</h2>
+      <p id="dialogExecutive"></p>
+      <div class="timeline" id="dialogTimeline"></div>
+    </dialog>
+    <dialog id="executiveDialog" class="client-dialog executive-dialog">
+      <button class="dialog-close" id="executiveDialogClose" type="button" aria-label="Fechar">×</button>
+      <span class="eyebrow">Gestão de acessos</span>
+      <h2>Cadastrar executivo</h2>
+      <p>O novo executivo será registrado no banco DB_Executivos do Pipefy.</p>
+      <form id="executiveForm" class="executive-form">
+        <label for="executiveName">Nome completo</label>
+        <input id="executiveName" name="name" autocomplete="name" placeholder="Ex.: João da Silva" maxlength="120" required />
+        <label for="executiveEmail">E-mail</label>
+        <input id="executiveEmail" name="email" type="email" autocomplete="email" placeholder="nome@quintoandar.com.br" maxlength="160" required />
+        <label for="executivePhone">Telefone</label>
+        <input id="executivePhone" name="phone" type="tel" autocomplete="tel" placeholder="(11) 99999-9999" maxlength="24" required />
+        <p class="form-message" id="executiveFormMessage" role="status"></p>
+        <div class="form-actions">
+          <button class="button button--secondary" id="executiveCancelButton" type="button">Cancelar</button>
+          <button class="button button--primary" id="executiveSubmitButton" type="submit">Salvar no Pipefy <span>→</span></button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="teamDialog" class="client-dialog team-dialog">
+      <button class="dialog-close" id="teamDialogClose" type="button" aria-label="Fechar">×</button>
+      <span class="eyebrow">Comunicação interna</span>
+      <h2>Executivos e corretores</h2>
+      <p>Contatos sincronizados com o DB_Executivos.</p>
+      <label class="directory-search">Buscar contato<input id="directorySearch" type="search" placeholder="Nome, e-mail ou telefone" /></label>
+      <div class="directory-list" id="directoryList"></div>
+    </dialog>
+    <script src="app.js"></script>
+  </body>
+</html>
