@@ -2,6 +2,7 @@ services:
   - type: web
     name: painel-virtual-executivos-quintoandar
     runtime: node
+    plan: free
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health
