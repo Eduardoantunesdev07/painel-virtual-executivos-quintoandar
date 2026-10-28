@@ -28,7 +28,7 @@ A autenticação local usa senha protegida por `scrypt`, cookie de sessão `Http
 
 ## Próxima etapa recomendada
 
-Conectar o painel a uma fonte real de dados (por exemplo Pipefy, planilha controlada ou banco de dados) e implementar autenticação no servidor. A marca atual é uma representação tipográfica baseada nas referências fornecidas; o arquivo oficial da logo pode substituir o bloco `.brand-mark` quando estiver disponível.
+O painel utiliza a logo oficial da RTx em `assets/logo-rtx-oficial.jpeg`, exibida na tela de acesso e no menu lateral.
 
 ## Configuração do Pipefy
 
