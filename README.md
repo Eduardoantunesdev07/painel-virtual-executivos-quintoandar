@@ -28,7 +28,7 @@ A autenticação local usa senha protegida por `scrypt`, cookie de sessão `Http
 
 ## Próxima etapa recomendada
 
-O painel utiliza a logo oficial da RTx em `assets/logo-rtx-oficial.jpeg`, exibida na tela de acesso e no menu lateral.
+O painel utiliza a versão compacta e transparente da logo oficial da RTx em `assets/logo-rtx-completa-transparente.png`, exibida na tela de acesso e no menu lateral.
 
 ## Configuração do Pipefy
 
